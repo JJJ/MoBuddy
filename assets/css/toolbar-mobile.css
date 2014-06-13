@@ -1,0 +1,798 @@
+/*--------------------------------------------------------------
+This is the mobile admin bar stylesheet. It creates the left and
+right slide drawers on devices with small screens.
+----------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 - Responsive media queries (mobile styles)
+	1.1 - MAXIMUM width of 720 pixels (phones)
+		1.1.1 - Layout
+		1.1.2 - Mobile Header
+		1.1.3 - Left Slide Drawer
+			1.1.3.1 - Left Button
+			1.1.3.2 - Admin Bar Layout
+			1.1.3.3 - Left Navigation Animation
+			1.1.3.4 - Left Content Animation
+			1.1.3.5 - Left Admin Bar Content
+		1.1.4 - Right Slide Drawer
+			1.1.4.1 - Right Button
+			1.1.4.2 - Right Menu (Pages) Layout
+			1.1.4.3 - Right Navigation Animation
+			1.1.4.4 - Right Content Animation
+			1.1.4.5 - Right Menu (Page) Content
+2.0 - Animations
+	2.1 - Left Animation
+		2.1.1 - Left: Menu Open
+		2.1.2 - Left: Menu Close
+		2.1.3 - Left: Content Open
+		2.1.4 - Left: Content close
+	2.2 - Right Animation
+		2.2.1 - Right: Menu Open
+		2.2.2 - Right: Menu Close
+		2.2.3 - Right: Content Open
+		2.2.4 - Right: Content close
+
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+1.0 - Responsive media queries (mobile styles)
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+1.1 - MAXIMUM width of 782 pixels (phones)
+--------------------------------------------------------------*/
+
+@media only screen and (max-width: 782px) {
+
+	/*--------------------------------------------------------------
+	1.1.1 - Layout
+	--------------------------------------------------------------*/
+
+	body.is-mobile {
+		margin-top: 0 !important;
+	}
+
+	body.open-left,
+	body.open-right {
+		cursor: pointer;
+	}
+	/** Modern browsers will ignore click events when menus are open **/
+	body.open-left #mobile-header .mobile-site-title,
+	body.open-right #mobile-header .mobile-site-title,
+	body.open-left #mobuddy-main-wrap *,
+	body.open-right #mobuddy-main-wrap * {
+		/*pointer-events: none;*/
+	}
+	/** Fallback to JS transitions **/
+	html.internal-js-transitions body #mobile-header,
+	html.internal-js-transitions body #mobuddy-main-wrap,
+	html.internal-js-transitions body #mobuddy-right-drawer,
+	html.internal-js-transitions body #wpadminbar {
+		/* modern browsers */
+		-webkit-transform: none!important;
+		-moz-transform: none!important;
+		transform: none!important;
+		-webkit-animation: none!important;
+		-moz-animation: none!important;
+		animation: none!important;
+		opacity: 1;
+	}
+
+	/** Discourage mobile touch/tap highlights **/
+	body,
+	.mobuddy-left-btn,
+	.mobuddy-right-btn,
+	#mobuddy-header,
+	#mobuddy-header .mobuddy-mobile-site-title,
+	#mobuddy-main-wrap {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		-webkit-tap-highlight-color: transparent; /* For some Androids */
+	}
+	.mobuddy-left-btn,
+	.mobuddy-right-btn {
+		-ms-touch-action: none;
+	}
+
+	/** Swipe helper **/
+	#mobuddy-swipe-area {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		-webkit-tap-highlight-color: transparent; /* For some Androids */
+		-ms-touch-action: none;
+		width: 100%;
+		position: fixed;
+		top: 0;
+		z-index: 9999;
+		cursor: pointer;
+		display: none;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.2 - Mobile Header
+	--------------------------------------------------------------*/
+
+	/* left and right starting point */
+	#mobuddy-header,
+	#mobuddy-main-wrap {
+		/* modern browsers */
+		-webkit-transform: translate3d(0,0,0);
+		-moz-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+	}
+	#mobuddy-header {
+		z-index: 9999;
+	}
+	#mobuddy-main-wrap {
+		z-index: 999;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.3 - Left Slide Drawer
+	--------------------------------------------------------------*/
+	/*--------------------------------------------------------------
+	1.1.3.1 - Left Button
+	--------------------------------------------------------------*/
+
+	.mobuddy-left-btn {
+		position: absolute;
+		height: 55px;
+		padding: 0 14px;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+		display: block;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color: transparent; /* For some Androids */
+	}
+	body.open-left .mobuddy-left-btn {
+		/* Click anywhere in header to close it */
+		width: 100%;
+	}
+	.mobuddy-left-btn:before {
+		font-family: 'dashicons';
+		font-weight: normal;
+		font-style: normal;
+		text-rendering: auto;
+		content: "\f110";
+		-webkit-font-smoothing: antialiased;
+		font-size: 25px;
+		line-height: 55px;
+		color: #fff;
+		float: left;
+	}
+	body.open-left .mobuddy-left-btn:before {
+		opacity: 0.5;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.3.2 - Admin Bar Layout
+	--------------------------------------------------------------*/
+
+	form#adminbarsearch {
+		display: none;
+	}
+
+	div#wpadminbar * {
+		font-family: "Open Sans", sans-serif;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	div#wpadminbar {
+		width: 240px;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+		margin: 0;
+		overflow-y: auto;
+		overflow-x: hidden;
+		background-color: #313639;
+	}
+	div#wpadminbar ul {
+		margin: 0;
+		padding: 0;
+	}
+	div#wpadminbar li {
+		display: block;
+		float: left;
+		clear: left;
+		width: 240px;
+		margin: 0;
+	}
+	div#wpadminbar li a {
+		padding: 8px 25px;
+		line-height: 1.6;
+		font-size: 15px;
+		color: #fff;
+		text-decoration: none;
+		display: block;
+	}
+	div#wpadminbar li a,
+	div#wpadminbar li a:active,
+	div#wpadminbar li a:hover {
+		color: #fff;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.3.3 - Left Navigation Animation
+	--------------------------------------------------------------*/
+
+	div#wpadminbar {
+		/* starting point */
+		opacity: .0;
+
+		/* modern browsers */
+		-webkit-transform: translate3d(30px,0,0)scale(.97);
+		-moz-transform: translate3d(30px,0,0)scale(.97);
+		transform: translate3d(30px,0,0)scale(.97);
+	}
+	.internal-js-transitions #wpadminbar {
+		left: -240px;
+	}
+
+	/* Nav Expanding Open Effect */
+	body.open-left div#wpadminbar {
+		opacity: 1;
+
+		/* modern browsers */
+		-webkit-overflow-scrolling: touch;
+
+		-webkit-transform: translate3d(0,0,0)scale(1);
+		-webkit-animation: slideInLeft .35s ease-in-out;
+
+		-moz-transform: translate3d(0,0,0)scale(1);
+		-moz-animation: slideInLeft .35s ease-in-out;
+
+		transform: translate3d(0,0,0)scale(1);
+		animation: slideInLeft .35s ease-in-out;
+	}
+
+	/* Nav Shrinking Closed Effect */
+	body.close-left div#wpadminbar {
+		opacity: .0;
+
+		/* modern browsers */
+		-webkit-transform: translate3d(30px,0,0)scale(.97);
+		-webkit-animation: slideOutLeft .3s ease-in-out;
+
+		-moz-transform: translate3d(30px,0,0)scale(.97);
+		-moz-animation: slideOutLeft .3s ease-in-out;
+
+		transform: translate3d(30px,0,0)scale(.97);
+		animation: slideOutLeft .3s ease-in-out;
+	}
+
+	/* Hide When Closed */
+	body div#wpadminbar {
+		display: none;
+	}
+	/* Display When Opened */
+	body.open-left div#wpadminbar,
+	body.close-left div#wpadminbar {
+		display: block;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.3.4 - Left Content Animation
+	--------------------------------------------------------------*/
+
+	/* Content Sliding Open Effect */
+	body.open-left #mobuddy-header,
+	body.open-left #mobuddy-main-wrap
+	{
+		/* modern browsers */
+		-webkit-transform: translate3d(240px,0,0);
+		-webkit-animation: openLeft .4s ease-in-out;
+
+		-moz-transform: translate3d(240px,0,0);
+		-moz-animation: openLeft .4s ease-in-out;
+
+		transform: translate3d(240px,0,0);
+		animation: openLeft .4s ease-in-out;
+	}
+
+	/* Content Sliding Closed Effect */
+	body.close-left #mobuddy-header,
+	body.close-left #mobuddy-main-wrap
+	{
+		/* modern browsers */
+		-webkit-transform: translate3d(0,0,0);
+		-webkit-animation: closeLeft .3s ease-in-out;
+
+		-moz-transform: translate3d(0,0,0);
+		-moz-animation: closeLeft .3s ease-in-out;
+
+		transform: translate3d(0,0,0);
+		animation: closeLeft .3s ease-in-out;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.3.5 - Left Admin Bar Content
+	--------------------------------------------------------------*/
+
+	/* Hide unused content */
+	body.logged-in #wpadminbar div.quicklinks ul#wp-admin-bar-root-default,
+	#wp-admin-bar-top-secondary li#wp-admin-bar-my-account.with-avatar > a.ab-item:first-of-type,
+	#wp-admin-bar-top-secondary li#wp-admin-bar-bp-notifications,
+	#wpadminbar a.screen-reader-shortcut {
+		display: none;
+	}
+
+	/* Account Info */
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info {
+		position: relative;
+	}
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info a {
+		min-height: 45px; /* must match height of avatar */
+		float: left;
+		padding-top: 20px;
+	}
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info a:focus {
+		outline: none;
+	}
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info img {
+		width: 45px;
+		height: 45px;
+		position: absolute;
+		top: 19px;
+		left: 24px;
+
+		-webkit-border-radius: 30px;
+		-moz-border-radius: 30px;
+		border-radius: 30px;
+	}
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info a span {
+		display: block;
+		position: relative;
+		float: left;
+		margin-left: 60px;
+		width: 130px;
+		line-height: 1.1;
+	}
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info a span.display-name {
+		font-size: 17px;
+		font-weight: 600;
+	}
+	#wp-admin-bar-top-secondary ul#wp-admin-bar-user-actions li#wp-admin-bar-user-info a span.username {
+		font-weight: 400;
+		margin-top: 8px;
+	}
+
+	/* Separators */
+	#wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li.menupop > a.ab-item {
+		background: #3C3C44;
+		color: #96969e;
+		cursor: default;
+		font-size: 11px;
+		font-weight: 400;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+	#wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li.menupop > a span.count {
+		display: none;
+	}
+
+	/* Indicators */
+	#wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li.menupop > div.ab-sub-wrapper li a span.count,
+	.mobuddy-left-btn #ab-pending-notifications {
+		background-color: #717176;
+		color: #fff;
+		font-size: 12px;
+		line-height: 1;
+		padding: 1px 6px;
+		margin-left: 1px;
+		border-radius: 999px;
+	}
+	#wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li#wp-admin-bar-my-account-notifications > div.ab-sub-wrapper li a span.count,
+	.mobuddy-left-btn #ab-pending-notifications {
+		background-color: #f82a1d;
+	}
+	.mobuddy-left-btn #ab-pending-notifications {
+		position: absolute;
+		top: 9px;
+		right: 7px;
+		line-height: 1.4;
+	}
+	.mobuddy-left-btn #ab-pending-notifications.no-alert {
+		display: none;
+	}
+
+	/* Bottom padding */
+	#wp-admin-bar-top-secondary li#wp-admin-bar-my-account {
+		padding-bottom: 30px;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.4 - Right Slide Drawer
+	--------------------------------------------------------------*/
+	/*--------------------------------------------------------------
+	1.1.4.1 - Right Button
+	--------------------------------------------------------------*/
+
+	.mobuddy-right-btn {
+		position: absolute;
+		height: 55px;
+		padding: 0 14px;
+		top: 0;
+		right: 0;
+		cursor: pointer;
+		display: block;
+		-webkit-tap-highlight-color: rgba(0,0,0,0);
+		-webkit-tap-highlight-color: transparent; /* For some Androids */
+	}
+	body.open-right .mobuddy-right-btn {
+		/* Click anywhere in header to close it */
+		width: 100%;
+	}
+	.mobuddy-right-btn:before {
+		font-family: 'dashicons';
+		font-weight: normal;
+		font-style: normal;
+		text-rendering: auto;
+		content: "\f333";
+		-webkit-font-smoothing: antialiased;
+		font-size: 28px;
+		line-height: 55px;
+		margin-top: 2px;
+		color: #fff;
+		float: right;
+	}
+	body.open-right .mobuddy-right-btn:before {
+		opacity: 0.5;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.4.2 - Right Menu (Pages) Layout
+	--------------------------------------------------------------*/
+
+	#mobuddy-right-drawer {
+		position: relative;
+		background-color: #313639;
+	}
+	#mobuddy-right-drawer li {
+		display: block;
+		float: right;
+		clear: right;
+		width: 240px;
+	}
+	#mobuddy-right-drawer li a {
+		padding: 8px 25px;
+		line-height: 1.6;
+		font-size: 15px;
+		color: #fff;
+		text-decoration: none;
+		display: block;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	#mobuddy-right-drawer li a,
+	#mobuddy-right-drawer li a:active,
+	#mobuddy-right-drawer li a:hover {
+		color: #fff;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.4.3 - Right Navigation Animation
+	--------------------------------------------------------------*/
+
+	#mobuddy-right-drawer {
+		width: 240px;
+		height: 100%;
+		position: fixed;
+		right: 0;
+		top: 0;
+		margin: 0;
+		overflow-y: auto;
+		overflow-x: hidden;
+
+		/* starting point */
+		opacity: 0;
+
+		/* modern browsers */
+		-webkit-transform: translate3d(-30px,0,0)scale(.97);
+		-moz-transform: translate3d(-30px,0,0)scale(.97);
+		transform: translate3d(-30px,0,0)scale(.97);
+	}
+	.internal-js-transitions #mobuddy-right-drawer {
+		right: -240px;
+	}
+
+	/* Nav Expanding Open Effect */
+	body.open-right #mobuddy-right-drawer {
+		opacity: 1;
+
+		/* modern browsers */
+		-webkit-overflow-scrolling: touch;
+
+		-webkit-transform: translate3d(0,0,0)scale(1);
+		-webkit-animation: slideInRight .35s ease-in-out;
+
+		-moz-transform: translate3d(0,0,0)scale(1);
+		-moz-animation: slideInRight .35s ease-in-out;
+
+		transform: translate3d(0,0,0)scale(1);
+		animation: slideInRight .35s ease-in-out;
+	}
+
+	/* Nav Shrinking Closed Effect */
+	body.close-right #mobuddy-right-drawer {
+		opacity: 0;
+
+		/* modern browsers */
+		-webkit-transform: translate3d(-30px,0,0)scale(.97);
+		-webkit-animation: slideOutRight .3s ease-in-out;
+
+		-moz-transform: translate3d(-30px,0,0)scale(.97);
+		-moz-animation: slideOutRight .3s ease-in-out;
+
+		transform: translate3d(-30px,0,0)scale(.97);
+		animation: slideOutRight .3s ease-in-out;
+	}
+
+
+	/* Hide When Closed */
+	body #mobuddy-right-drawer {
+		display: none;
+	}
+	/* Display When Opened */
+	body.open-right #mobuddy-right-drawer,
+	body.close-right #mobuddy-right-drawer {
+		display: block;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.4.4 - Right Content Animation
+	--------------------------------------------------------------*/
+
+	/* Content Sliding Open Effect */
+	body.open-right #mobuddy-header,
+	body.open-right #mobuddy-main-wrap
+	{
+		/* modern browsers */
+		-webkit-transform: translate3d(-240px,0,0);
+		-webkit-animation: openRight .4s ease-in-out;
+
+		-moz-transform: translate3d(-240px,0,0);
+		-moz-animation: openRight .4s ease-in-out;
+
+		transform: translate3d(-240px,0,0);
+		animation: openRight .4s ease-in-out;
+	}
+
+	/* Content Sliding Closed Effect */
+	body.close-right #mobuddy-header,
+	body.close-right #mobuddy-main-wrap
+	{
+		/* modern browsers */
+		-webkit-transform: translate3d(0,0,0);
+		-webkit-animation: closeRight .3s ease-in-out;
+
+		-moz-transform: translate3d(0,0,0);
+		-moz-animation: closeRight .3s ease-in-out;
+
+		transform: translate3d(0,0,0);
+		animation: closeRight .3s ease-in-out;
+	}
+
+	/*--------------------------------------------------------------
+	1.1.4.5 - Right Menu (Page) Content
+	--------------------------------------------------------------*/
+
+	/* Current Page */
+	.main-navigation div.nav-inner li.current-menu-item > a {
+		background-color: #3f4448;
+	}
+	.main-navigation div.nav-inner > div ul > li > ul.sub-menu li a:before {
+		font-family: 'dashicons';
+		font-weight: normal;
+		font-style: normal;
+		text-rendering: auto;
+		text-decoration: inherit;
+		speak: none;
+		display: inline-block;
+		line-height: 1;
+		content: "\f111";
+		-webkit-font-smoothing: antialiased;
+		color: #575757;
+		margin-right: 7px;
+		font-size: 10px;
+		vertical-align: middle;
+		opacity: 0.6;
+	}
+
+	/* Bottom padding */
+	.main-navigation ul.nav-menu {
+		padding-bottom: 30px;
+	}
+
+}
+
+/*--------------------------------------------------------------
+2.0 - Animations
+--------------------------------------------------------------*/
+
+/**
+ * Keyframe animations within @media declarations break
+ * in IE, so we separate them. If different animations
+ * are required for different screen-sizes, you can
+ * duplicate below and re-name them like "slideInLeftOnMobile"
+ */
+
+/*--------------------------------------------------------------
+2.1 - Left Animation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+2.1.1 - Left: Menu Open
+--------------------------------------------------------------*/
+
+@-webkit-keyframes slideInLeft {
+	0%    {opacity: 0;
+				 -webkit-transform: translate3d(30px,0,0)scale(.97);}
+	100%  {opacity: 1;
+				 -webkit-transform: translate3d(0,0,0)scale(1);}
+}
+@-moz-keyframes slideInLeft {
+	0%    {opacity: 0;
+				 -moz-transform: translate3d(30px,0,0)scale(.97);}
+	100%  {opacity: 1;
+				 -moz-transform: translate3d(0,0,0)scale(1);}
+}
+@keyframes slideInLeft {
+	0%    {opacity: 0;
+				 transform: translate3d(30px,0,0)scale(.97);}
+	100%  {opacity: 1;
+				 transform: translate3d(0,0,0)scale(1);}
+}
+
+/*--------------------------------------------------------------
+2.1.2 - Left: Menu Close
+--------------------------------------------------------------*/
+
+@-webkit-keyframes slideOutLeft {
+	0%    {opacity: 1;
+				 -webkit-transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: 0;
+				 -webkit-transform: translate3d(30px,0,0)scale(.97);}
+}
+@-moz-keyframes slideOutLeft {
+	0%    {opacity: 1;
+				 -moz-transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: 0;
+				 -moz-transform: translate3d(30px,0,0)scale(.97);}
+}
+@keyframes slideOutLeft {
+	0%    {opacity: 1;
+				 transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: 0;
+				 transform: translate3d(30px,0,0)scale(.97);}
+}
+
+/*--------------------------------------------------------------
+2.1.3 - Left: Content Open
+--------------------------------------------------------------*/
+
+@-webkit-keyframes openLeft {
+	0%    {-webkit-transform: translate3d(0,0,0);}
+	70%   {-webkit-transform: translate3d(260px,0,0);}
+	100%  {-webkit-transform: translate3d(240px,0,0);}
+}
+@-moz-keyframes openLeft {
+	0%    {-moz-transform: translate3d(0,0,0);}
+	70%   {-moz-transform: translate3d(260px,0,0);}
+	100%  {-moz-transform: translate3d(240px,0,0);}
+}
+@keyframes openLeft {
+	0%    {transform: translate3d(0,0,0);}
+	70%   {transform: translate3d(260px,0,0);}
+	100%  {transform: translate3d(240px,0,0);}
+}
+
+/*--------------------------------------------------------------
+2.1.4 - Left: Content close
+--------------------------------------------------------------*/
+
+@-webkit-keyframes closeLeft {
+	0%    {-webkit-transform: translate3d(240px,0,0);}
+	100%  {-webkit-transform: translate3d(0,0,0);}
+}
+@-moz-keyframes closeLeft {
+	0%    {-moz-transform: translate3d(240px,0,0);}
+	100%  {-moz-transform: translate3d(0,0,0);}
+}
+@keyframes closeLeft {
+	0%    {transform: translate3d(240px,0,0);}
+	100%  {transform: translate3d(0,0,0);}
+}
+
+
+/*--------------------------------------------------------------
+2.2 - Right Animation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+2.2.1 - Right: Menu Open
+--------------------------------------------------------------*/
+
+@-webkit-keyframes slideInRight {
+	0%    {opacity: 0;
+				 -webkit-transform: translate3d(-30px,0,0)scale(.97);}
+	100%  {opacity: 1;
+				 -webkit-transform: translate3d(0,0,0)scale(1);}
+}
+@-moz-keyframes slideInRight {
+	0%    {opacity: 0;
+				 -moz-transform: translate3d(-30px,0,0)scale(.97);}
+	100%  {opacity: 1;
+				 -moz-transform: translate3d(0,0,0)scale(1);}
+}
+@keyframes slideInRight {
+	0%    {opacity: 0;
+				 transform: translate3d(-30px,0,0)scale(.97);}
+	100%  {opacity: 1;
+				 transform: translate3d(0,0,0)scale(1);}
+}
+
+/*--------------------------------------------------------------
+2.2.2 - Right: Menu Close
+--------------------------------------------------------------*/
+
+@-webkit-keyframes slideOutRight {
+	0%    {opacity: 1;
+				 -webkit-transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: 0;
+				 -webkit-transform: translate3d(-30px,0,0)scale(.97);}
+}
+@-moz-keyframes slideOutRight {
+	0%    {opacity: 1;
+				 -moz-transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: 0;
+				 -moz-transform: translate3d(-30px,0,0)scale(.97);}
+}
+@keyframes slideOutRight {
+	0%    {opacity: 1;
+				 transform: translate3d(0,0,0)scale(1);}
+	100%  {opacity: 0;
+				 transform: translate3d(-30px,0,0)scale(.97);}
+}
+
+/*--------------------------------------------------------------
+2.2.3 - Right: Content Open
+--------------------------------------------------------------*/
+
+@-webkit-keyframes openRight {
+	0%    {-webkit-transform: translate3d(0,0,0);}
+	70%   {-webkit-transform: translate3d(-260px,0,0);}
+	100%  {-webkit-transform: translate3d(-240px,0,0);}
+}
+@-moz-keyframes openRight {
+	0%    {-moz-transform: translate3d(0,0,0);}
+	70%   {-moz-transform: translate3d(-260px,0,0);}
+	100%  {-moz-transform: translate3d(-240px,0,0);}
+}
+@keyframes openRight {
+	0%    {transform: translate3d(0,0,0);}
+	70%   {transform: translate3d(-260px,0,0);}
+	100%  {transform: translate3d(-240px,0,0);}
+}
+
+/*--------------------------------------------------------------
+2.2.4 - Right: Content close
+--------------------------------------------------------------*/
+
+@-webkit-keyframes closeRight {
+	0%    {-webkit-transform: translate3d(-240px,0,0);}
+	100%  {-webkit-transform: translate3d(0,0,0);}
+}
+@-moz-keyframes closeRight {
+	0%    {-moz-transform: translate3d(-240px,0,0);}
+	100%  {-moz-transform: translate3d(0,0,0);}
+}
+@keyframes closeRight {
+	0%    {transform: translate3d(-240px,0,0);}
+	100%  {transform: translate3d(0,0,0);}
+}

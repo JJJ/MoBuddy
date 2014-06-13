@@ -1,0 +1,105 @@
+#main-wrap{
+		height: 100%;
+		overflow: auto;
+	}
+		#cover-photo{
+			position: relative;
+			width: 100%;
+			height: 400px;
+			background-color: #f1f1f1;
+		}
+		#profile-wrap{
+			position: relative;
+			width: 1136px;
+			height: 100%;
+			margin: 0 auto;
+		}
+			#profile-left{
+				float: left;
+				width: 19.542253521127%;
+				margin: 0 5.545774647887% 0 0;
+				position: absolute;
+				top: -148px;
+				left: 0;
+			}
+			#profile-right{
+				float: right;
+				width: 74.911971830986%;
+			}
+			#item-header{
+				
+			}
+				#profile-right h1{
+					margin: 0;
+					font-size: 48px;
+					font-weight: 500;
+					color: #4b2524;
+					text-transform: uppercase;
+					line-height: 1;
+				}
+					#item-header h1 a,#item-header h1 a:visited,#item-header h1 a:hover,#item-header h1 a:active{
+						color: #4b2524;
+					}
+				#item-header-content-left,#item-header-content-right{
+					float: left;
+					width: 50%;
+					margin: 38px 0 0;
+				}
+				#item-header-content-right #member-time{
+					padding: 0 0 0 15px;
+					float: right;
+				}
+				#item-header-content-right #member-time #their-time{
+					font-size: 22px;
+					color: #be1e2d;
+				}
+				#item-header-content-right #member-time #their-time-label{
+					font-size: 18px;
+					color: #58585b;
+				}
+				#item-header-content-right #member-time #your-time{
+					font-size: 10px;
+					color: #939597;
+				}
+				#item-header-content-right #member-time-zone{
+					float: right;
+					padding: 0 15px 0 0;
+					border-right: 1px solid #58585b;
+				}
+				#item-header-content-right #member-time-zone #hours-offset{
+					font-size: 11px;
+					color: #58585b;
+				}
+				#item-header-content-right #member-time-zone #time-zone{
+					font-size: 24px;
+					color: #be1e2d;
+					text-transform: uppercase;
+				}
+				#item-header-content-left #member-title{
+					float: left;
+					margin: 0 34px 0 0;
+					font-size: 22px;
+					color: #be1e2d;
+				}
+				#item-header-content-left #member-city{
+					float: left;
+					font-size: 22px;
+					color: #808284;
+				}
+		#buddypress div#member-header div#item-header div#item-header-avatar{
+			width: 100% !important;
+		}
+			#buddypress div#member-header div#item-header div#item-header-avatar img{
+				max-width: 100%;
+				height: auto;
+				margin: 0;
+				border: 0;
+				border-radius: 50%;
+			}
+
+		#buddypress div#item-header div#item-header-content, #buddypress div#item-header div#item-buttons, #buddypress div#item-header div#message, #buddypress div#item-body {
+			width: 100%;
+		}
+		#buddypress div#item-body{
+			margin: 50px 0;
+		}

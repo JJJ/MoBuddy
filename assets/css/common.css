@@ -1,0 +1,83 @@
+@media screen and (max-width: 782px) {
+
+	html, body {
+		background-color: #34393d !important;
+		overflow-x: hidden;
+	}
+	#mobuddy-main-wrap {
+		background-color: #fff;
+		position: relative;
+		margin-top: 0px;
+		overflow: auto;
+
+		/*  Prevents Flickering  */
+		-webkit-backface-visibility: hidden;
+		-webkit-perspective: 1000;
+	}
+	#mobuddy-inner-wrap {
+		background-color: #fff;
+		margin-top: 55px;
+	}
+	.mobuddy-header-inner {
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	#mobuddy-right-drawer ul {
+		margin: 0 0 1.625em 2.5em;
+	}
+
+	/* Mobile Header
+	--------------------------------------------------------------------------*/
+
+	#mobuddy-header {
+		height: 55px;
+		z-index: 2;
+		background-color: #111;
+
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+
+		/* starting point */
+		-webkit-transform: translate3d(0,0,0);
+		-moz-transform: translate3d(0,0,0);
+		transform: translate3d(0,0,0);
+	}
+	#mobuddy-header,
+	#mobuddy-header * {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;		
+	}
+	#mobuddy-header h1 {
+		text-align: center;
+		font-size: 23px;
+		line-height: 55px;
+		font-weight: 600;
+		display: block;
+		text-decoration: none;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		margin: 0 60px;
+		color: #fff;
+	}
+	#mobuddy-header h1 a {
+		color: #fff;
+		text-decoration: none;
+	}
+}
+
+@media screen and (min-width: 783px) {
+	#mobuddy-right-drawer {
+		display: none;
+	}
+	#mobuddy-header {
+		display: none;
+	}
+}
